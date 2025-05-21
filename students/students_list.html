@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="fetchStudents()">
+    <h1>Students List</h1>
+    <div id="add">
+        <button onclick="new_student()">Add Student</button>
+        <button onclick="fetchStudents()">Refresh</button>
+        <!-- <button onclick="window.location.href='index.html'">Back</button> -->
+    </div>
+
+    <div id="error-message" class="error" style="display: none;"></div>
+
+    <table id="students-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        function fetchStudents() {
+            let parameters = 'students_list.php'; // API URL
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                let result = JSON.parse(this.responseText);
+                if (result.db_error) {
+                    document.getElementById('error-message').textContent = result.db_error;
+                    document.getElementById('error-message').style.display = 'block';
+                    return;
+                }
+                document.getElementById('error-message').style.display = 'none';
+                const studentsTableBody = document.querySelector('#students-table tbody');
+                studentsTableBody.innerHTML = ''; // Clear any existing rows
+                if (result.students && result.students.length > 0) {
+                    // Use a 'for' loop to iterate over the students array
+                    for (let i = 0; i < result.students.length; i++) {
+                        const student = result.students[i];
+                        const row = document.createElement('tr');
+
+                        // String concatenation instead of template literals
+                        row.innerHTML = '<td>' + student.id + '</td>' +
+                            '<td>' + student.name + '</td>' +
+                            '<td>' + student.email + '</td>' +
+                            '<td>' + student.mobile + '</td>';
+                        studentsTableBody.appendChild(row);
+                    }
+                } else {
+                    document.getElementById('error-message').textContent = 'No students found.';
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            };
+
+            // Open the request and send it
+            xhttp.open("GET", parameters, true);
+            xhttp.send();
+        }
+        
+        function add_student() {
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    /* position: ; */
+}
+
+menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+
+    /* gap:10px; */
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+span{
+    color: red;
+}
+
+#form_container {
+    display: flex;
+    width: 400px;
+    /* height: 440px; */
+    align-items: center;
+    background: #b9ecb2;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 100px;
+}
+
+/* #forgot_container{ */
+    /* display: flex; */
+    /* width: 400px; */
+    /* height: 440px; */
+    /* align-items: center; */
+    /* background: #b9ecb2; */
+    /* padding: 20px; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* margin: auto; */
+    /* margin-top: 100px; */
+    /* background-color: blue; */
+/* } */
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.form h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.form_data {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.form_data label {
+    align-items: left;
+    margin-left: 10px
+}
+
+.form_data input {
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    border: 1px solid black;
+    width: 360px;
+}
+
+#form_submit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* margin-right: 10px;   */
+}
+
+#form_submit input {
+    padding: 10px;
+    border-radius: 30px;
+    border-style: none;
+    border: 1px solid rgb(151, 151, 211);
+    background-color: rgb(221, 238, 232);
+}
+
+.form_links{
+    display:flex;
+    justify-content:space-between;
+}
+
+.form_label{
+    display:flex;
+    justify-content:space-between;
+    margin-right: 10px;
+}
+
+#valid_username{
+    background-color: #f0f0f0;
+    color:#333;
+    border: 1px solid #ccc;
+    cursor:pointer;
+}

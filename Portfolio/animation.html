@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Only Hover Effect</title>
+  <style>
+    body {
+      height: 200vh; /* To enable scrolling for demonstration */
+      margin: 0;
+    }
+
+    .scroll-content {
+      position: relative;
+      left: -100%; /* Start off-screen */
+      opacity: 0;
+      transition: all 1s ease-out; /* Smooth animation */
+    }
+
+    .container:hover .scroll-content {
+      left: 0;
+      opacity: 1;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="scroll-content">
+      <h1>Hover to Slide In</h1>
+      <p>This simulates an effect, but it requires user interaction.</p>
+    </div>
+  </div>
+</body>
+</html>

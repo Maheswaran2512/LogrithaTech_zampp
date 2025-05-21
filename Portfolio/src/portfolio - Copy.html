@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="blue">
+    <title>Resume</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #a0aecd;
+            --primary_shadow: #b5bed1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            /* height: 80px; */
+            height: 70px;
+            border-radius: 5px;
+            background-color: var(--primary);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            /* box-shadow: 0 2px 5px rgba(0, 72, 253, 0.1); */
+            box-shadow: 0px 10px 50px var(--primary);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .nav_list {
+            display: flex;
+            gap: 30px
+        }
+
+        .ancher1 {
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .ancher1:hover {
+            color: aquamarine;
+            transition: color 0.3s ease;
+        }
+
+        .main_art {
+            margin-top: 100px;
+            margin-bottom: 100px;
+            padding: 0px 80px 0px 80px;
+            border: 1px;
+        }
+
+        section {
+            scroll-margin-top: 100px;
+            height: auto;
+        }
+
+        hr {
+            margin: 10px;
+        }
+
+        section .heading:first-child {
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+
+        .home_main {
+            height: 500px;
+            width: 100%;
+            display: flex;
+        }
+
+        .home_content {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .link {
+            display: flex;
+            gap: 25px;
+        }
+
+        .link a {
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home_description {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .description {
+            text-align: center;
+        }
+
+        h1+figure {
+            display: flex;
+            justify-content: center;
+            /* background-color: red; */
+            padding: 20px;
+        }
+
+        .my_img {
+            border: 0.1px solid rgb(243, 243, 253);
+            box-shadow: 0px 0px 30px var(--primary);
+            border-radius: 50%;
+            transition-duration: 0.3s;
+        }
+
+        .my_img:hover {
+            box-shadow: 0px 0px 30px rgb(224, 224, 224);
+        }
+
+        .skill_style {
+            display: grid;
+            /* grid-template-columns: 300px 300px 300px 300px 300px 300px 300px; */
+            grid-template-columns: repeat(7, 300px);
+            /* margin-top: 10px; */
+            gap: 10px;
+            overflow: scroll;
+            scrollbar-width: none;
+            padding: 5px 10px;
+        }
+
+
+        .skill_style>div {
+            padding: 20px;
+            margin: 10px 5px;
+            flex-grow: 1;
+            border-radius: 10px;
+            border: 1px solid var(--primary_shadow);
+            box-shadow: 5px 5px 10px 0px var(--primary);
+            box-sizing: border-box;
+            transition-duration: 0.3s;
+            /* flex-shrink: 1; */
+            /* align-items: stretch; */
+        }
+
+        .skill_style>div:hover {
+            transform: scale(1.1);
+        }
+
+        .skill_style>div li {
+            text-indent: 10px;
+        }
+
+        .d1 {
+            order: 4;
+        }
+
+        .d2 {
+            order: 1;
+        }
+
+        .d3 {
+            order: 2;
+        }
+
+        .d4 {
+            order: 3;
+        }
+
+        .d5 {
+            order: 5;
+        }
+
+        .d6 {
+            order: 6;
+        }
+
+        .d7 {
+            order: 7;
+        }
+
+        article {
+            border: 1px solid lightblue;
+            background-color: #dfe9ff;
+            box-shadow: 5px 5px 10px var(--primary_shadow);
+            padding: 15px;
+            border-radius: 30px;
+            margin: 10px 0px;
+            line-height: 22px;
+            text-align: justify;
+        }
+
+        .intern {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intern_left {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .intern_right {
+            width: 50%;
+            padding: 10px;
+        }
+
+        .intern_right aside {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 50%);
+            row-gap: 10px;
+        }
+
+        .intern_right aside .box {
+            padding: 5px;
+            height: 150px;
+        }
+
+        .intern_right aside div>img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .box {
+            border: 1px solid black;
+            border-radius: 1%;
+            height: 120px;
+            margin: 5px;
+        }
+
+        #project_list {
+            margin: 20px 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .project_box {
+            width: 350px;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 10px 0px rgb(98, 100, 105);
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            flex-grow: 1;
+            box-sizing: border-box;
+            align-items: stretch;
+            transition: 1s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* flex-shrink: 0; */
+        }
+
+        .project_box_1 {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+
+        .project_img {
+            width: 100%;
+            height: 230px;
+            object-fit: fill;
+            border-radius: 10px;
+            /* flex-grow: 1; */
+        }
+
+
+        .project_box h3 {
+            text-transform: uppercase;
+            font-weight: bolder;
+            line-height: 20px;
+            text-align: justify;
+            margin: 0px 5px;
+        }
+
+        .project_box p {
+            text-align: justify;
+            margin: 0px 5px;
+        }
+
+        .project_box li {
+            margin: 0px 5px;
+            text-align: justify;
+        }
+
+        .project_button {
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 10px;
+        }
+
+        .project_button>a button {
+            text-transform: uppercase;
+            padding: 10px;
+            background-color: whitesmoke;
+            border-radius: 30px;
+            border: 1px solid var(--primary);
+            box-shadow: 0px 0px 10px var(--primary);
+            transition-duration: 0.3s;
+        }
+
+        .project_button>a button:hover {
+            box-shadow: 0px 0px 15px skyblue;
+        }
+
+        .project_box:hover {
+            box-shadow: 0px 8px 16px 0px rgb(200, 201, 202);
+        }
+
+        #form_container {
+            border: 1px solid black;
+            margin: auto;
+            width: 500px;
+            padding: 20px;
+            background-color: #a4b5db;
+            border-radius: 10px;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        span {
+            color: red;
+        }
+
+        .form_data>label {
+            flex-basis: 100px;
+            font-weight: bold;
+        }
+
+        .form_data {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+            outline: none;
+            box-shadow: 0px 0px 40px var(--primary);
+        }
+
+        .form_data>input:focus {
+            border-color: aqua;
+        }
+
+        .form_data>textarea:focus {
+            border-color: aqua;
+        }
+
+
+        .radio_form input {
+            width: 20px;
+        }
+
+        .radio_main {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .radio_feild {
+            display: flex;
+            align-items: center;
+        }
+
+        /* .radio_form {
+            gap: 10px !important;
+            flex-direction: column;
+            align-items: flex-start !important;
+            justify-content: flex-start;
+        }
+
+        .radio_form>div>label {
+            flex-basis: 0px;
+            align-content: left;
+            font-weight: bold;
+        }
+
+        .radio_form>div>div {
+            flex-direction: row !important;
+            justify-content: space-between;
+            margin-left: 10px;
+        }
+
+        .radio_form .submit {
+            width: fit-content;
+            margin-left: 100px;
+        } */
+
+        .checkbox_form {
+            gap: 10px !important;
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+
+        .checkbox_form input {
+            width: 20px;
+        }
+
+        .checkbox_form>div>label {
+            flex-basis: 0px;
+            align-content: left;
+            font-weight: bold;
+        }
+
+        .checkbox_form>div>div {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* justify-content: space-between; */
+            /* align-items: center; */
+            column-gap: 60px;
+            row-gap: 5px;
+            width: auto;
+            margin-top: 10px;
+        }
+
+
+        .checkbox_form>div>div>div {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .checkbox_form>div>input {
+            width: fit-content;
+        }
+
+        #submitbtn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #submitbtn>input {
+            width: fit-content;
+            /* float: inline-end; */
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        #success {
+            color: rgb(98, 0, 255);
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .footer {
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 72, 253, 0.1);
+            box-shadow: 0px 10px 50px var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid #ccc;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-text {
+            box-shadow: 10px 10px 50px #a4b5db;
+            font-weight: bolder;
+            font-style: italic;
+            letter-spacing: 5px;
+        }
+
+        @media screen and (max-width:767px) {
+
+            .nav {
+                display: none;
+            }
+
+            .main_art {
+                padding: 0px 30px 0px 30px;
+            }
+
+            .home_main {
+                display: block;
+                justify-content: center;
+                align-items: center;
+                height: auto;
+            }
+
+            .home_content {
+                width: 100%;
+            }
+
+            .home_description {
+                width: 100%;
+                margin-top: 50px;
+                text-align: center;
+            }
+
+            .skill_style {
+                display: block;
+                /* padding: 10px; */
+            }
+
+            /* .d1 {
+                order: 2;
+            }
+
+            .d2 {
+                order: 1 ;
+            }
+
+            .d3 {
+                order: 4;
+            }
+
+            .d4 {
+                order: 3;
+            } */
+
+            .intern {
+                display: flex;
+                flex-direction: column;
+                gap: 0px;
+            }
+
+            .intern_left {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .intern_right {
+                width: 100%;
+                padding: 0px;
+            }
+
+            .intern_right aside {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                gap: 10px;
+                /* grid-template-columns: repeat(auto-fill, 100%);
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                row-gap: 10px;
+                justify-content: center;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 100%); */
+            }
+
+            .box {
+                width: 320px;
+                height: 200px;
+            }
+
+            #project_list {
+                margin: 20px 0px;
+            }
+
+            #form_container {
+                max-width: 100%;
+                padding: 2%;
+            }
+
+            .checkbox_form>div>div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                column-gap: 0px;
+                margin-top: 10px;
+            }
+
+            .checkbox_form>div>div>div {
+                margin-left: 0px;
+            }
+
+            #submitbtn>span {
+                font-size: 12px;
+            }
+
+            .footer-text {
+                font-size: 10px;
+                letter-spacing: 1px;
+                transition-duration: 0.5s;
+            }
+
+            .footer-text:hover {
+                font-size: 12px;
+                text-transform: 0.7em;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- header start -->
+    <header class="header">
+        <figure>
+            <img src="..\logo.png" alt="logo" class="logo" width="100" height="70">
+        </figure>
+        <nav class="nav">
+            <ul class="nav_list">
+                <a class="ancher1" href="#home">Home</a>
+                <a class="ancher1" href="#about">About</a></li>
+                <a class="ancher1" href="#skill">Skill</a></li>
+                <a class="ancher1" href="#experience">Experience</a>
+                <a class="ancher1" href="#projects">Projects</a>
+                <a class="ancher1" href="#contact">Contact</a>
+            </ul>
+        </nav>
+    </header>
+    <!-- header end -->
+
+    <!-- main start -->
+    <main class="main_art">
+        <!-- section start -->
+        <section class="home" id="home">
+            <div class="home_main">
+                <div class="home_content">
+                    <h2 class="heading">Welcome to My Portfolio</h2>
+                    <h2>MAHESWARAN D</h2>
+                    <div class="link">
+                        <a href="mailto:devamahesh8116@gmail.com?subject=Visitor"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/maheswaran-devanathan-867423223/"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Maheswaran2512"><i class="fab fa-github"></i></a>
+                        <a href="tel:7395995717"><i class="fas fa-phone fa-flip-horizontal"></i></a>
+                    </div>
+                </div>
+                <div class="home_description">
+                    <p class="description">This is a brief overview of my skills and experiences.</p>
+                    <a href=""></a>
+                </div>
+            </div>
+        </section>
+        <!-- section end -->
+        <hr style="margin:10px;">
+        <!-- section start -->
+        <section class="about" id="about">
+            <h1 class="heading">About Me</h1>
+            <figure>
+                <img src="DSC_0632squre.jpg" class="my_img" alt="Your Photo" width="300px" height="300px">
+            </figure>
+            <p class="description">I am a <a href="https://mysterh.netlify.app/" target="_blank" title="WEB_DEVOLOP">web
+                    developer</a> with a
+                passion for creating dynamic and responsive websites.</p>
+        </section>
+        <!-- section end -->
+        <hr>
+        <!-- section start -->
+        <section class="skill" id="skill">
+            <h1 class="heading">Skills</h1>
+            <h3>Technical Skills</h3>
+            <div class="skill_style">
+                <div class="d1">
+                    <h4>Programming Language</h4>
+                    <li>C</li>
+                    <li>Python</li>
+                </div>
+                <div class="d2">
+                    <h4>Front-end</h4>
+                    <li>HTML </li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>JQuery</li>
+                </div>
+                <div class="d3">
+                    <h4>Back-end</h4>
+                    <li>PHP</li>
+                </div>
+                <div class="d4">
+                    <h4>Data-Base</h4>
+                    <li>MySQL </li>
+                </div>
+                <div class="d5">
+                    <h4>Data-Base</h4>
+                    <li>MySQL </li>
+                </div>
+                <div class="d6">
+                    <h4>Data-Base</h4>
+                    <li>MySQL </li>
+                </div>
+                <div class="d7">
+                    <h4>Data-Base</h4>
+                    <li>MySQL </li>
+                </div>
+            </div>
+        </section>
+        <!-- section end -->
+        <hr>
+        <!-- section start -->
+        <section class="experience" id="experience">
+            <h1 class="heading">Experience</h1>
+            <div class="intern">
+                <div class="intern_left">
+                    <article>
+                        <h2>SAMCORE SOLUTION</h2><br>
+                        <h3>Intern | July 2024 - August 2024 | Thiruchirappalli <br> <i> Internet of Things | Offlice
+                            </i> </h3>
+                        <li>Learn about IOT implementation in various components and the integration of embedded systems
+                            with IOT</li>
+                    </article>
+                    <article>
+                        <h2>BSNL - Bharat Sanchar Nigam Limited</h2><br>
+                        <h3> Intern | 3rd July 2023 - 7th July 2023 | Thanjavur <Br> <i>Fundamentals of Telecom, Digital
+                                Communication, Optical Fiber Concepts, and Broadband Technology | Offline </i> </h3>
+                        <li> Hands-on experience in telecom fundamentals, digital communication,
+                            optical fiber concepts, and broadband technology. Gained practical
+                            knowledge in the core areas of telecommunications and network systems.</li>
+                    </article>
+                </div>
+                <div class="intern_right">
+                    <aside>
+                        <div class="box"> <img src="../pongal.png" alt="Alter Image"></div>
+                        <div class="box"> <img src="../pongal.png" alt="Alter Image"></div>
+                        <div class="box"> <img src="../pongal.png" alt="Alter Image"></div>
+                        <div class="box"> <img src="../pongal.png" alt="Alter Image"></div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+        <!-- section end -->
+        <hr>
+        <!-- section start -->
+        <section class="projects" id="projects">
+            <h1 class="heading">Projects</h1>
+            <div id="project_list">
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="irs.jpg" alt="project_img" />
+                        <h3>Design an Implementation of Sensor for a Small-MIMO Wireless Networks</h3>
+                        <p>Final Year Project</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://github.com/Maheswaran2512/IRS" style="color:black"><button>View
+                                Project</button></a>
+                    </div>
+                </div>
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="mysterh.png" alt="project_img" />
+                        <h3>Portfolio Website</h3>
+                        <p>Tools: HTML | CSS | JavaScript | JSON</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://mysterh.netlify.app/" style="color:black"><button>View Project</button></a>
+                    </div>
+                </div>
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="sis.jpg" alt="project_img" />
+                        <h3>Smart Irrigation System Using Arduino</h3>
+                        <li>Awarded 3rd Prize at Mini Project Expo – ISTE Student Chapter [TN 217]</li>
+                        <li>Secured 2nd Place in Electrovibez’23 – National Level Technical Symposium</li>
+                        <p>A Smart Irrigation System using Arduino is an automated system designed to optimize
+                            water usage for farming, gardening, or landscaping. It monitors soil moisture levels and
+                            controls water flow based on real-time conditions, reducing water waste and ensuring
+                            efficient irrigation.</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://github.com/Maheswaran2512/Smart_Water_System" style="color:black"><button>View
+                                Project</button></a>
+                    </div>
+                </div>
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="mister.png" alt="project_img" />
+                        <h3>Web Interface Development</h3>
+                        <p>Tools: HTML, CSS</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://github.com/Maheswaran2512/Mister" style="color:black"><button>View
+                                Project</button></a>
+                    </div>
+                </div>
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="MH.jpg" alt="project_img" />
+                        <h3>Web Interface Development</h3>
+                        <p>Tools: HTML, CSS</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://github.com/Maheswaran2512/Mister" style="color:black"><button>View
+                                Project</button></a>
+                    </div>
+                </div>
+                <div class="project_box">
+                    <div class="project_box_1">
+                        <img class="project_img" src="MH.jpg" alt="project_img" />
+                        <h3>Web Interface Development</h3>
+                        <p>Tools: HTML, CSS</p>
+                    </div>
+                    <div class="project_button link">
+                        <a href="https://github.com/Maheswaran2512/Mister" style="color:black"><button>View
+                                Project</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- section start -->
+        <hr style="margin:10px;">
+        <!-- section start -->
+        <section class="contact" id="contact">
+            <h1 class="heading">Contact Me</h1>
+            <p class="description">Feel free to reach out via email or LinkedIn.</p>
+            <!-- form starts -->
+            <form action="validation.php" id="my_form" method="get">
+                <div id="form_container">
+                    <div id="form_datas">
+                        <div class="form_data">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter Your Name" />
+                        </div>
+                        <div class="form_data">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Enter Your Email"
+                                oninput="email_validation()" />
+                        </div>
+                        <div class="form_data">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" id="mobile" placeholder="Enter Your Mobile Number"
+                                oninput="mobile_validation()" />
+                        </div>
+                        <div class="form_data">
+                            <label for="message">Message</label>
+                            <textarea rows="5" id="message" placeholder="Enter Your Message"></textarea>
+                        </div>
+                        <div class="radio_form">
+                            <div>
+                                <div
+                                    style="display: flex;justify-content: space-between;margin:0px 10px; font-weight: bold;">
+                                    <label>You are</label><span id="radio_error"></span>
+                                </div>
+                                <div class="radio_main">
+                                    <div class="radio_feild">
+                                        <input type="radio" id="student" class="radio_input" name="radio"
+                                            value="Student" />
+                                        <label for="student">Student</label>
+                                    </div>
+                                    <div class="radio_feild">
+                                        <input type="radio" id="faculty" class="radio_input" name="radio"
+                                            value="Faculty" />
+                                        <label for="faculty">Faculty</label>
+                                    </div>
+                                    <div class="radio_feild">
+                                        <input type="radio" id="others" class="radio_input" name="radio"
+                                            value="Others" />
+                                        <label for="others">Others</label>
+                                    </div>
+                                    <!-- <input type="submit" class="submit" id="radio" value="Proceed" onclick="radio_validation()" /> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form_data checkbox_form">
+                            <div>
+                                <label>Required Service</label><span id="checkbox_error"></span>
+                                <div>
+                                    <div>
+                                        <input type="checkbox" id="webdevelopment" name="checkbox"
+                                            value="Web Development" />
+                                        <label for="webdevelopment">Web Development</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="frontend" name="checkbox" value="Front_End" />
+                                        <label for="frontend">Front-end</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="backend" name="checkbox" value="Back_End" />
+                                        <label for="backend">Back-end</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="fullstack" name="checkbox" value="Full_Stacks" />
+                                        <label for="fullstack">Full Stack Development</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="dbs" name="checkbox" value="Data-Base_Service">
+                                        <label for="dbs">Data-Base Service</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" id="hardware" name="checkbox" value="Hardware_Service">
+                                        <label for="hardware">Hardware Service</label>
+                                    </div>
+                                </div>
+                                <!-- <input type="submit" class="submit" id="radio" value="Proceed" onclick="checkbox_validation()" /> -->
+                            </div>
+                        </div>
+                        <div id="submitbtn">
+                            <input type="reset">
+                            <span id="success"></span>
+                            <!-- <button type="submit" value="Submit" onclick="validation()">Submit</button> -->
+                            <input type="submit" value="Submit" id="submit_form" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- form end -->
+        </section>
+        <!-- section end -->
+    </main>
+    <!-- main end -->
+    <!-- footer start -->
+    <footer class="footer">
+        <p class="footer-text">&copy 2025 My Resume. All rights reserved.</p>
+    </footer>
+    <!-- footer end -->
+
+    <!-- script start -->
+    <script>
+
+        // validation function
+        let submit = document.getElementById("submit_form");
+        submit.addEventListener("click", function () {
+            event.preventDefault();
+            let my_form = document.getElementById("my_form");
+            feild_inputs = ["name", "email", "mobile", "message"];
+            // if ((radio_validation() && checkbox_validation()) && input_validation(feild_inputs) ) {
+            if (input_validation(feild_inputs) && radio_validation() && checkbox_validation()) {
+                // if (input_validation(feild_inputs)) {
+                alert("Message Send Successfully \n\n Our Team will Reach you soon...")
+                document.getElementById("success").innerText = "We will ReachYou Soon";
+                console.log("submit");
+                my_form.submit();
+            } else {
+                console.log("error");
+            }
+            // feild_inputs.value="";
+        });
+        // emailjs.init('ixPPgpfnPjX6KgqX1');
+        // const templateParams = {
+        //     from_name: document.getElementById('name').value,
+        //     from_email: document.getElementById('email').value,
+        //     from_mobile: document.getElementById('mobile').value,
+        //     message: document.getElementById('message').value
+        // };
+        // emailjs.send('service_qr94m2m', 'template_1u8km3t', templateParams)
+        //     .then(() => {
+        //         alert('Message sent successfully! Thank you for contacting us! We will get back to you soon!');
+        //     })
+        //     .catch((error) => {
+        //         alert('Error sending message: ' + error.text);
+        //     });
+
+
+        // self-predefined function for box
+        function box_error(box, color) {
+            box.style.borderWidth = "2px";
+            box.style.borderColor = color;
+            box.style.outline = "none";
+        }
+
+        // email validation function
+        function email_validation() {
+            let email_input = document.getElementById("email");
+            email_input.value = email_input.value.toLowerCase();
+            const emailReg = /^[a-z0-9._]+@[a-z]+\.[a-z]{2,}$/;
+            if (emailReg.test(email_input.value)) {
+                box_error(email_input, "green");
+                return true;
+            } else {
+                box_error(email_input, "red");
+                return false;
+            }
+        }
+
+        // mobile validation function
+        function mobile_validation() {
+            let mobile_input = document.getElementById("mobile");
+            const mobilereg = /^[6789][0-9]{9}$/;
+            if (mobilereg.test(mobile_input.value)) {
+                console.log(mobile_input);
+                box_error(mobile_input, "green");
+                return true;
+            } else {
+                box_error(mobile_input, "red");
+                return false;
+            }
+        }
+
+        // radio button validation function
+        function radio_validation() {
+            event.preventDefault();
+            radio_input = document.getElementsByName("radio");
+            radio_error = document.getElementById("radio_error");
+            for (let i = 0; i < radio_input.length; i++) {
+                if (radio_input[i].checked) {
+                    radio_error.innerText = ""
+                    return true;
+                }
+            }
+            radio_error.innerText = "Select";
+            return false;
+        }
+
+        // checkbox validaiton function
+        function checkbox_validation() {
+            event.preventDefault();
+            checkbox_input = document.getElementsByName("checkbox");
+            checkbox_error = document.getElementById("checkbox_error");
+            for (let i = 0; i < checkbox_input.length; i++) {
+                if (checkbox_input[i].checked) {
+                    console.log(checkbox_input.length);
+                    checkbox_error.innerText = "";
+                    return true;
+                }
+            }
+            checkbox_error.innerText = "*";
+            return false;
+        }
+
+
+        // self pre-defined input validation function
+        function input_validation(feild_inputs) {
+            let feild_count = feild_inputs.length;
+            let feild_flag = 0;
+            for (let i = 0; i < feild_inputs.length; i++) {
+                let input = document.getElementById(feild_inputs[i]);
+                let validate_funcation = feild_inputs[i] + "_validation()";
+                if (input.value == "") {
+                    box_error(input, "red");
+                } else {
+                    try {
+                        let validation = eval(validate_funcation);
+                        console.log(validate_funcation + [i]);
+                        if (validation) {
+                            console.log(validate_funcation + [i] + "work aguthu");
+                            box_error(input, "lightgreen");
+                            feild_flag = feild_flag + 1;
+                        }
+                    } catch {
+                        console.log("Function Error (not found)");
+                        box_error(input, "lightgreen");
+                        feild_flag = feild_flag + 1;
+                    } finally {
+                        console.log("finaly" + [i])
+                    }
+                }
+            }
+            console.log(feild_flag);
+            if (feild_count === feild_flag) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // function validation() {
+        //     event.preventDefault();
+        //     let my_form = document.getElementById("my_form");
+        //     //req documents for validation
+        //     feild_inputs = ["name", "email", "mobile", "message"];
+
+        //     // email_fun = ["email_validation()"];
+        //     // mobile_fun = ["mobilereg_validation()"];
+
+        //     // functions = ["",email_validation(), mobile_validation(),""];
+        //     input_validation(feild_inputs);
+
+        //     // if (input_validation(feild_inputs)) {
+        //     //     my_form.submit();
+        //     //     console.log('submit');
+        //     // }
+        // }
+        // document.getElementById('submit_form').addEventListener('click', function () {
+        //     event.preventDefault();
+        //     emailjs.init('ixPPgpfnPjX6KgqX1');
+        //     const templateParams = {
+        //         from_name: document.getElementById('name').value,
+        //         from_email: document.getElementById('email').value,
+        //         message: document.getElementById('message').value
+        //     };
+        //     emailjs.send('service_qr94m2m', 'template_1u8km3t', templateParams)
+        //         .then(() => {
+        //             alert('Message sent successfully! Thank you for contacting us! We will get back to you soon!');
+        //         })
+        //         .catch((error) => {
+        //             alert('Error sending message: ' + error.text);
+        //         });
+        // });
+    </script>
+    <!-- script end -->
+
+</body>
+
+</html>

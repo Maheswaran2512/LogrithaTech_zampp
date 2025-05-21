@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div id="form_container">
+        <!-- <form action="registration.php" method="POST" id="register_form" class="form"></form> -->
+        <form action="registration.php" method="POST" id="register_form" class="form">
+            <h1>Registration</h1>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="name">Username</label>
+                    <span id="name_error">test</span>
+                </div>
+                <input type="text" id="name" name="name" oninput="name_case()" placeholder="Name" autocomplete="name">
+            </div>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="email">Email</label>
+                    <span id="email_error">test</span>
+                </div>
+                <input type="email" id="email" name="email" oninput="email_case()" placeholder="Email"
+                    autocomplete="email">
+            </div>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="password">Password</label>
+                    <span id="password_error"></span>
+                </div>
+                <input type="password" id="password" name="password" oninput="password_case()" placeholder="Password"
+                    autocomplete="password">
+            </div>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="c_password">Confirm Password</label>
+                    <span id="c_password_error">test</span>
+                </div>
+                <input type="password" id="c_password" name="c_password" oninput="c_password_case()"
+                    placeholder="Confirm Password" autocomplete="c_password">
+            </div>
+            <div id="form_submit">
+                <span id="submit_error" style="text-align: right; color:red;"></span>
+                <input type="submit" id="submit" onclick="validation(event)" value="Register">
+            </div>
+            <div id="rediract" style="display:none;text-align: center;">
+                <span> If not rediract <a href="login.html">Click Here</a></span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function input_error(element, color) {
+            element.style.borderWidth = "1.5px";
+            element.style.borderColor = color;
+            element.style.outline = "none";
+        }
+
+        function text_error(element, color) {
+            element.style.fontWeight = "light";
+            element.style.color = color;
+        }
+
+        // function input_validation(id, error_msg) {
+        //     let feild_name = document.getElementById(id);
+        //     let feild_error = document.getElementById(id + "_error");
+        //     if (feild_name.value == "") {
+        //         feild_error.innerText = error_msg;
+        //         input_error(feild_name, "red");
+        //         text_error(feild_error, "red");
+        //         return false;
+        //     } else {
+        //         feild_error.innerText = "";
+        //         input_error(feild_name, "green");
+        //         text_error(feild_erro    r, "green");
+        //         return true;
+        //     }
+        // }
+        function input_validation(feild_inputs) {
+            let feild_count = feild_inputs.length;
+            let feild_flag = 0;
+            for (let i = 0; i < feild_inputs.length; i++) {
+                let input = document.getElementById(feild_inputs[i]);
+                let validate_funcation = feild_inputs[i] + "_case()";
+                if (input.value == "") {
+                    input_error(input, "red");
+                } else {
+                    try {
+                        let validation = eval(validate_funcation);
+                        console.log(validate_funcation + [i]);
+                        if (validation) {
+                            console.log(validate_funcation + [i] + " work aguthu");
+                            input_error(input, "lightgreen");
+                            feild_flag = feild_flag + 1;
+                        }
+                    } catch {
+                        console.log("Function Error (not found)");
+                        input_error(input, "lightgreen");
+                        feild_flag = feild_flag + 1;
+                    } finally {
+                        console.log("finaly" + [i])
+                    }
+                }
+            }
+            console.log(feild_flag);
+            if (feild_count === feild_flag) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function name_case() {
+            let name = document.getElementById("name");
+            let name_error = document.getElementById("name_error");
+            if (name.value == "") {
+                input_error(name, "red");
+                return false;
+            } else {
+                input_error(name, "green");
+                return true;
+            }
+        }
+
+        function email_case() {
+            let email = document.getElementById("email");
+            let email_error = document.getElementById("email_error");
+            email.value = email.value.toLowerCase();
+            // email=email.value;
+            const emailregx = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+            if (!emailregx.test(email.value)) {
+                document.getElementById("email_error").innerHTML = "Please enter a valid email address";
+                input_error(email, "red");
+                text_error(email_error, "red");
+                return false;
+            } else {
+                document.getElementById("email_error").innerHTML = "";
+                input_error(email, "green");
+                return true;
+            }
+        }
+
+        function password_case() {
+            let password = document.getElementById("password");
+            let password_error = document.getElementById("password_error");
+            const passwordregx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+            if (!passwordregx.test(password.value)) {
+                document.getElementById("password_error").innerHTML = "A-Za-z0-9";
+                input_error(password, "red");
+                text_error(password_error, "red");
+                return false;
+            } else {
+                document.getElementById("password_error").innerHTML = "";
+                input_error(password, "green");
+                return true;
+            }
+        }
+
+        function c_password_case() {
+            let password = document.getElementById("password");
+            let c_password = document.getElementById("c_password");
+            let c_password_error = document.getElementById("c_password_error");
+
+            if (password.value !="" && c_password.value!="") {
+                if(password.value === c_password.value){
+                    // console.log(password.value);
+                    c_password_error.innerText = "";
+                    input_error(password, "green");
+                    input_error(c_password, "green");
+                    return true;    
+                }else{
+                    c_password_error.innerText = "Password Mismatch*";
+                    input_error(password, "red");
+                    input_error(c_password, "red");
+                    text_error(c_password_error, "red");
+                    return false;
+                }
+            } else {
+                c_password_error.innerText = "Enter Confrim Password";
+                input_error(password, "red");
+                input_error(c_password, "red");
+                return false;
+            }
+        }
+
+        function validation(event) {
+            event.preventDefault();
+            let name = document.getElementById("name");
+            let email = document.getElementById("email");
+            let password = document.getElementById("password");
+            let c_password = document.getElementById("c_password");
+            let name_error = document.getElementById("name_error");
+            let email_error = document.getElementById("email_error");
+            let password_error = document.getElementById("password_error");
+            let c_password_error = document.getElementById("c_password_error");
+            let submit_error = document.getElementById("submit_error");
+            let goto =  document.getElementById("rediract");
+
+            // input_feild()
+
+            let error_flag = true;
+
+            feild_inputs = ["name", "email", "password", "c_password"];
+
+            if (!input_validation(feild_inputs)) {
+                error_flag = false;
+            }
+
+            // if (!input_validation("name", "Enter Your Name")) {
+            //     error_flag = false;
+            // }
+            // if (!input_validation("email", "Enter Your email")) {
+            //     error_flag = false;
+            // }
+            // if (!input_validation("password", "Enter Your password")) {
+            //     error_flag = false;
+            // }
+            // if (!input_validation("c_password", "Enter Your c_password")) {
+            //     error_flag = false;
+            // }
+
+            if (name.value == "" || email.value == "" || password.value == "" || c_password.value == "") {
+                submit_error.innerText = "Fill all the fields*";
+                error_flag = false;
+            } else {
+                if (!email_case()) error_flag = false;
+                console.log(error_flag);
+                if (!password_case()) error_flag = false;
+                console.log(error_flag);
+                if (!c_password_case()) error_flag = false;
+                console.log(error_flag);
+                submit_error.innerText = "";
+            }
+
+            // if (error_flag) {
+            //     let parameters = `name=${name.value}&email=${email.value}&password=${c_password.value}`;
+            //     console.log(parameters);  
+            //     const xttpsrequest = new XMLHttpRequest();
+            //     xttpsrequest.onload = function () {
+            //         let response = JSON.parse(this.responseText);
+            //         if (response.success != "") {
+            //             alert("Registration successful!");
+            //             document.getElementById("register_form").reset();
+            //         } else {
+            //             if (response.name_error != "") name_error.innerText = response.name_error;
+            //             if (response.email_error != "") email_error.innerText = response.email_error;
+            //             if (response.password_error != "") password_error.innerText = response.password_error;
+            //         }
+            //     };
+            //     xttpsrequest.open("GET", "http://localhost/loginsystem/registration.php?" + parameters, true);
+            //     xttpsrequest.send();
+            // }
+
+            if (error_flag) {
+                const submitButton = document.getElementById("submit");
+                submitButton.disabled = true;
+                submitButton.value = "Submitting...";
+                let parameters = `name=${name.value}&email=${email.value}&password=${c_password.value}`;
+                // console.log(parameters);
+                const xttpsrequest = new XMLHttpRequest();
+                xttpsrequest.onload = function () {
+                    try {
+                        let response = JSON.parse(this.responseText);
+                        // console.log(response);
+                        // console.log(response.email_error);
+                        if (response.success != "") {
+                            alert("Registration successful!");
+                            // submitButton.disabled = false;
+                            // submitButton.value = "Register";
+                            document.getElementById("register_form").reset();
+                            const inputs = document.querySelectorAll("input");
+                            inputs.forEach(input => {
+                                input.style.borderColor = "";
+                                input.style.borderWidth = "";
+                                input.style.outline = "";
+                            });
+                            goto.style.display="block";
+                            setTimeout(()=>{
+                                window.location.href="login.html";
+                            },3000);
+
+                        } else {
+                            if (response.name_error != "") name_error.innerText = response.name_error;
+                            if (response.email_error != "") email_error.innerText = response.email_error;
+                            if (response.password_error != "") password_error.innerText = response.password_error;
+                        }
+                    } catch (e) {
+                        console.error("Invalid JSON response:", this.responseText);
+                        alert("An error occurred. Please try again.");
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.value = "Register";
+                    }
+                    // finally {
+                    //     const inputs = document.querySelectorAll("input");
+                    //     inputs.forEach(input => {
+                    //         input.style.borderColor = "";
+                    //         input.style.borderWidth = "";
+                    //         input.style.outline = "";
+                    //     });
+                    // }
+                };
+                xttpsrequest.open("POST", "http://localhost/loginsystem/registration.php", true);
+                xttpsrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xttpsrequest.send(parameters); // Send parameters in the request body
+            }
+        }
+    </script>
+</body>
+
+</html>

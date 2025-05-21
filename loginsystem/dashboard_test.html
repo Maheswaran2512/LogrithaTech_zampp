@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* #main{
+            margin: 50px;
+            border: 1px solid rgb(255, 0, 0);
+            border-radius: 30px;
+        } */
+
+        #main_div {
+            display: flex;
+            min-height: 100vh;
+            margin-left: 220px;
+        }
+
+        #sidebar {
+            width: 220px;
+            background: #222;
+            color: #fff;
+            min-height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar_header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;   
+            padding: 10px 10px;
+            border-bottom: 1px solid #444;
+        }
+        .sidebar_header img{
+            width: 100px;
+            height: 100px;
+            border: 1px solid white;
+            border-radius: 50%;
+        }
+        .sidebar_header h3{
+            padding: 10px;
+        }
+
+        .sidebar_menu {
+            list-style: none;
+        }
+
+        .sidebar_menu li {
+            margin: 20px 0;
+        }
+
+        .sidebar_menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .sidebar_menu a:hover {
+            background: #444;
+            border-radius: 4px;
+        }
+
+        .sidebar_menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <main id="main">
+        <div id="main_div">
+            <aside id="sidebar">
+                <div class="sidebar_header">
+                    <img src="" alt="" id="user_profile">
+                    <h3>Welcome, <span style="color:white" id="username">Test</span></h3>
+                </div>
+                <ul class="sidebar_menu">
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </aside>
+
+
+            <!-- Your main content here -->
+            <section style="flex:1; padding:40px;">
+                <h1>Welcome to your Dashboard!</h1>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- <link rel="stylesheet" href="../loginsystem/styles.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main_div {
+            display: flex;
+            min-height: 100vh;
+            margin-left: 220px;
+        }
+
+        #sidebar {
+            width: 220px;
+            background-color: palegreen;
+            border-radius: 10px;
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar_header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid black;
+        }
+
+        .sidebar_header img {
+            width: 150px;
+            height: 150px;
+            margin: 5px;
+            border: 3px solid white;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .sidebar_header h3 {
+            padding: 10px;
+        }
+
+        .sidebar_nav {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar_menu,
+        .sidebar_menu_btn {
+            list-style: none;
+        }
+
+        .sidebar_menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: flex;
+            transition: 0.5s;
+        }
+
+        .sidebar_menu a:hover {
+            background: rgb(233, 172, 233);
+            border-radius: 5px;
+        }
+
+        .sidebar_menu i {
+            margin-right: 20px;
+            width: 20px;
+        }
+
+        ul.sidebar_menu {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sidebar_menu,
+        .sidebar_menu_btn li {
+            font-size: 20px;
+        }
+
+        .sidebar_menu_btn li {
+            margin-left: 20px;
+        }
+
+        #hero_container {
+            width: 100%;
+            /* margin-left:240px; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <main id="main">
+        <div id="main_div">
+            <aside id="sidebar">
+                <div class="sidebar_header">
+                    <img src="../Portfolio/img/MH.jpg" alt="UserProfile" id="user_profile">
+                    <h3>Welcom, <span style="color:white" id="username">Test</span></h3>
+                </div>
+                <div class="sidebar_nav">
+                    <ul class="sidebar_menu">
+                        <li><a href="" id="a1"><i class="fa fa-home"></i>test</a></li>
+                        <li><a href="" id="a2"><i class="fa fa-user"></i>test</a></li>
+                        <li><a href="" id="a3"><i class="fas fa-cog"></i>test</a></li>
+                        <li><a href="" id="a4"><i class="fas fa-sign-out-alt"></i>test</a></li>
+                    </ul>
+                    <ul class="sidebar_menu_btn">
+                        <li id="menu_btn" class="fa fa-home"></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section id="hero_container">
+                <h1>welcome to you Dashboard</h1>
+            </section>
+        </div>
+    </main>
+
+</body>
+
+<script>
+    menu_btn = document.getElementById("menu_btn");
+    menu_btn.addEventListener("click", function (e) {
+        alert("working");
+        sidebar.style.display = "none";
+        main_div.style.marginLeft = "0px";
+        main_div.style.transition = "0.5s";
+        sidebar.style.transition = "0.5s";
+        sidebar.style.width = "0px";
+    }
+    );
+</script>
+
+
+</html>

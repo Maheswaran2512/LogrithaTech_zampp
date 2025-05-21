@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="form_container">
+        <form action="login_api.php" method="POST" id="register_form" class="form">
+            <h1>Login</h1>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="name">Username/Email</label>
+                    <span id="name_error">test</span>
+                </div>
+                <input type="text" id="name" name="name" oninput="name_case()" placeholder="Username/Email">
+            </div>
+            <div class="form_data">
+                <div class="form_label">
+                    <label for="password">Password</label>
+                    <span id="password_error">test</span>
+                </div>
+                <input type="password" id="password" name="password" oninput="password_case()" placeholder="Password">
+            </div>
+            <span id="submit_error"></span>
+            <div id="form_submit">
+                <input type="submit" id="submit" onclick="login()" value="Login">
+            </div>
+            <div class="form_links">
+                <input type="submit" id="forgot_btn" value="Forgot Password">
+                <p>Don't Have Account <a href="register.html"> Click here</a></p>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgot_container" class="modal">
+        <form id="forgot_form" class="modal-content">
+            <div style="display:flex; align-items: center; justify-content: space-between;">
+                <h2>Forgot Password</h2>
+                <span class="close" id="close_modal">&times;</span>
+            </div>
+            <br>
+            <div class=form_data>
+                <div>
+                    <label for="name1" style="margin-left: 0;">Let's get you back in-Enter your Email/Username to reset
+                        it</label>
+                    <span id="name1_error" style="float: right;">test</span>
+                </div>
+                <input type="text" id="name1" placeholder="Username/Email">
+            </div>
+            <br>
+            <span id="submit1_error"></span>
+            <div class="form_data">
+                <input type="submit" id="forgot_submit" onclick="forgot_password()" value="Check">
+            </div>
+        </form>
+    </div>
+
+    <div id="forgot_container1" class="modal">
+        <form id="forgot_form1" class="modal-content">
+            <div style="display:flex; align-items: center; justify-content: space-between;">
+                <h2>Forgot Password</h2>
+                <span class="close" id="close_modal">&times;</span>
+            </div>
+            <br>
+            <div class="form_data">
+                <input type="text" id="valid_username" readonly>
+            </div>
+            <br>
+            <div class=form_data>
+                <div>
+                    <label for="password1" style="margin-left: 0;">Please Enter New Password</label>
+                    <span id="password1_error" style="float: right;">test</span>
+                </div>
+                <input type="password" id="password1" placeholder="New Password">
+            </div>
+            <br>
+            <div class=form_data>
+                <div>
+                    <label for="c_password1" style="margin-left: 0;">Re-Enter New Password</label>
+                    <span id="c_password1_error" style="float: right;">test</span>
+                </div>
+                <input type="password" id="c_password1" placeholder="Re-Enter Password">
+            </div>
+            <br>
+            <span id="submit2_error"></span>
+            <div class="form_data">
+                <input type="submit" id="forgot_password_submit" onclick="forgot_password_validation()" value="Submit">
+            </div>
+        </form>
+    </div>
+
+</body>
+
+<script>
+
+    const forgot_container = document.getElementById("forgot_container");
+    const forgot_btn = document.getElementById("forgot_btn");
+    const close_modal = document.getElementById("close_modal");
+
+    forgot_btn.addEventListener("click", function () {
+        event.preventDefault();
+        forgot_container.style.display = "block";
+    });
+
+    close_modal.addEventListener("click", function () {
+        forgot_container.style.display = "none";
+    })
+
+    function input_error(element, color) {
+        element.style.borderWidth = "1.5px";
+        element.style.borderColor = color;
+        element.style.outline = "none";
+    }
+
+    function text_error(element, color) {
+        element.style.fontWeight = "light";
+        element.style.color = color;
+    }
+
+    function input_validation(feild_inputs) {
+        let feild_count = feild_inputs.length;
+        let feild_flag = 0;
+        for (let i = 0; i < feild_inputs.length; i++) {
+            // console.log(feild_inputs[i]);
+            let input = document.getElementById(feild_inputs[i]);
+            let error = document.getElementById(feild_inputs[i] + "_error");
+            console.log(error);
+            let validate_funcation = feild_inputs[i] + "_case()";
+            // console.log(validate_funcation);
+            if (input.value == "") {
+                input_error(input, "red");
+                text_error(error, "red");
+                error.innerText = "Enter " + input.placeholder.toLowerCase();
+            } else {
+                try {
+                    let validation = eval(validate_funcation);
+                    console.log(validate_funcation + [i]);
+                    if (validation) {
+                        console.log(validate_funcation + [i] + " work aguthu");
+                        input_error(input, "lightgreen");
+                        feild_flag = feild_flag + 1;
+                    }
+                } catch {
+                    console.log("Function Error (not found)");
+                    input_error(input, "lightgreen");
+                    feild_flag = feild_flag + 1;
+                } finally {
+                    console.log("finaly" + [i])
+                }
+            }
+        }
+        console.log(feild_flag);
+        if (feild_count === feild_flag) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function name_case() {
+        let name = document.getElementById("name");
+        let name_error = document.getElementById("name_error");
+        const emailregx = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+        name.value = name.value.toLowerCase();
+        if (name.value == "") {
+            name_error.innerHTML = "Enter username/email";
+            input_error(name, "red");
+            text_error(name_error, "red");
+            return false;
+        }
+        // else {
+        //     if () {
+        //     }
+        //     else if (!emailregx.test(name.value)) {
+        //         name_error.innerHTML = "Please enter a valid username/email";
+        //         return false;
+        //     }
+        else {
+            name_error.innerHTML = "";
+            input_error(name, "green");
+            name = name.value;
+            return true;
+        }
+
+    }
+
+    function name1_case() {
+        let name1 = document.getElementById("name1");
+        let name1_error = document.getElementById("name1_error");
+        const emailregx = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+        name1.value = name1.value.toLowerCase();
+        if (name1.value == "") {
+            name1_error.innerHTML = "Enter username/email";
+            input_error(name1, "red");
+            text_error(name1_error, "red");
+            return false;
+        }
+        else {
+            name1_error.innerHTML = "";
+            input_error(name1, "green");
+            name1 = name1.value;
+            return true;
+        }
+    }
+
+    function password_case() {
+        let password = document.getElementById("password");
+        let password_error = document.getElementById("password_error");
+        // const passwordregx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        if (password.value == "") {
+            document.getElementById("password_error").innerHTML = "Enter Password";
+            input_error(password, "red");
+            text_error(password_error, "red");
+            return false;
+        } else {
+            document.getElementById("password_error").innerHTML = "";
+            input_error(password, "green");
+            return true;
+        }
+    }
+
+    function password1_case() {
+        let password1 = document.getElementById("password1");
+        let password1_error = document.getElementById("password1_error");
+        const passwordregx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        if (!passwordregx.test(password1.value)) {
+            document.getElementById("password1_error").innerHTML = "A-Za-z0-9";
+            input_error(password1, "red");
+            text_error(password1_error, "red");
+            return false;
+        } else {
+            document.getElementById("password1_error").innerHTML = "";
+            input_error(password1, "green");
+            return true;
+        }
+    }
+
+    function c_password1_case() {
+        let password1 = document.getElementById("password1");
+        let c_password1 = document.getElementById("c_password1");
+        let c_password1_error = document.getElementById("c_password1_error");
+
+        if (password1.value != "" && c_password1.value != "") {
+            if (password1.value === c_password1.value) {
+                // console.log(password.value);
+                c_password1_error.innerText = "";
+                input_error(password1, "green");
+                input_error(c_password1, "green");
+                return true;
+            } else {
+                c_password1_error.innerText = "Password Mismatch*";
+                input_error(password1, "red");
+                input_error(c_password1, "red");
+                text_error(c_password1_error, "red");
+                return false;
+            }
+        } else {
+            c_password1_error.innerText = "Enter Confrim Password";
+            input_error(password1, "red");
+            input_error(c_password1, "red");
+            return false;
+        }
+    }
+
+    function login() {
+        event.preventDefault();
+        let name = document.getElementById("name");
+        let password = document.getElementById("password");
+        let name_error = document.getElementById("name_error");
+        let password_error = document.getElementById("password_error");
+        let submit_error = document.getElementById("submit_error");
+        // input_feild()
+        let error_flag = true;
+
+        feild_inputs = ["name", "password"];
+
+        if (!input_validation(feild_inputs)) {
+            error_flag = false;
+        }
+
+        if (name.value == "" || password.value == "") {
+            submit_error.innerText = "Fill all the fields*";
+            error_flag = false;
+        } else {
+            if (!name_case()) error_flag = false;
+            console.log(error_flag);
+            if (!password_case()) error_flag = false;
+            console.log(error_flag);
+            submit_error.innerText = "";
+        }
+
+        if (error_flag) {
+            let parameters = `name=${name.value}&password=${password.value}`;
+            console.log(parameters);
+            const xttpsrequest = new XMLHttpRequest();
+            xttpsrequest.onload = function () {
+                console.log(this.responseText);
+                let response = JSON.parse(this.responseText);
+                try {
+                    if (response.success != "") {
+                        alert("login successful!");
+                        window.location.href = "dashboard.html";
+                        // setTimeout(() => {
+                        //     window.location.href = "dashboard.html";
+                        // }, 3000);
+                        // document.getElementById("register_form").reset();
+                    } else {
+                        if (response.name_error != "") {
+                            name_error.innerText = response.name_error;
+                            // name.style.borderColor = "red";
+                            // name.style.outline="none";
+                            // name.style.borderWidth="1.5px";
+                            input_error(name, "red");
+                        } else if (response.password_error != "") {
+                            password_error.innerText = response.password_error;
+                            input_error(password, "red");
+                        }
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON response:", this.responseText);
+                    alert("An error occurred. Please try again.");
+                }
+            };
+            xttpsrequest.open("POST", "http://localhost/loginsystem/login_api.php", true);
+            xttpsrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xttpsrequest.send(parameters);
+        }
+    }
+
+    function forgot_password() {
+        event.preventDefault();
+        let name1 = document.getElementById("name1");
+        let name1_error = document.getElementById("name1_error");
+        let submit1_error = document.getElementById("submit1_error");
+        const forgot_container = document.getElementById("forgot_container");
+        const forgot_container1 = document.getElementById("forgot_container1");
+        let valid_username = document.getElementById("valid_username");
+        let error_flag = true;
+        feild_inputs = ["name1"];
+        if (!input_validation(feild_inputs)) {
+            error_flag = false;
+        }
+
+        if (name.value == "") {
+            submit1_error.innerText = "Fill all the fields*";
+            error_flag = false;
+        } else {
+            if (!name1_case()) error_flag = false;
+            console.log(error_flag);
+            submit1_error.innerText = "";
+        }
+
+        if (error_flag) {
+            let parameters = `name=${name1.value}`;
+            console.log(parameters);
+            const xttpsrequest = new XMLHttpRequest();
+            xttpsrequest.onload = function () {
+                console.log(this.responseText);
+                let response = JSON.parse(this.responseText);
+                try {
+                    if (response.success != "") {
+                        // alert("valid User");
+                        forgot_container.style.display = "none";
+                        forgot_container1.style.display = "block";
+                        valid_username.value = name1.value;
+                        // setTimeout(() => {
+                        //     // window.location.href = "#";
+                        // }, 1000);
+                        // document.getElementById("register_form").reset();
+                    } else {
+                        if (response.name_error != "") name1_error.innerText = response.name_error;
+                        name1.style.borderColor = "red";
+                        // if (response.password_error != "") password_error.innerText = response.password_error;
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON response:", this.responseText);
+                    alert("An error occurred. Please try again.");
+                }
+            };
+            xttpsrequest.open("POST", "http://localhost/loginsystem/forgot_api.php", true);
+            xttpsrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xttpsrequest.send(parameters);
+        }
+    }
+
+    function forgot_password_validation() {
+        event.preventDefault();
+        let name = document.getElementById("valid_username");
+        let password1 = document.getElementById("password1");
+        let password1_error = document.getElementById("password1_error");
+        let c_password1 = document.getElementById("c_password1");
+        let c_password1_error = document.getElementById("c_password1_error");
+        let submit2_error = document.getElementById("submit2_error");
+        const forgot_container1 = document.getElementById("forgot_container1");
+
+        let error_flag = true;
+
+        feild_inputs = ["password1", "c_password1"];
+
+        if (!input_validation(feild_inputs)) {
+            error_flag = false;
+        }
+        if (password1.value == "" || c_password1.value == "") {
+            submit2_error.innerText = "Fill all the fields*";
+            error_flag = false;
+        } else {
+            if (!password1_case()) error_flag = false;
+            if (!c_password1_case()) error_flag = false;
+            console.log(error_flag);
+            submit2_error.innerText = "";
+        }
+
+        if (error_flag) {
+            let parameters = `name=${name.value}&password=${c_password1.value}`;
+            console.log(parameters);
+            const xttpsrequest = new XMLHttpRequest();
+            xttpsrequest.onload = function () {
+                console.log(this.responseText);
+                let response = JSON.parse(this.responseText);
+                try {
+                    if (response.success != "") {
+                        alert("update successful!");
+                        forgot_container1.style.display = "none";
+
+                        // setTimeout(() => {
+                        //     window.location.href = "dashboard.html";
+                        // }, 3000);
+                        // document.getElementById("register_form").reset();
+                    } else {
+                        // if (response.password_error != "") c_password1_error.innerText = response.password_error;
+                        if (response.password_error != "") c_password1_error.innerText = response.password_error;
+                    }
+                } catch (e) {
+                    console.error("Invalid JSON response:", this.responseText);
+                    alert("An error occurred. Please try again.");
+                }
+            };
+            xttpsrequest.open("POST", "http://localhost/loginsystem/forgot_password_api.php", true);
+            xttpsrequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xttpsrequest.send(parameters);
+        }
+    }
+
+</script>
+
+</html>
